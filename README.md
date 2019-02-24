@@ -2,6 +2,8 @@
 A pythonistic way of viewing upcoming calendar events.
 This is based on https://developers.google.com/calendar/quickstart/python
 
+We have tech team culture meetings about improving culture and quality of life for the tech team, and I thought, it would be nice to have a shared calendar where the team can see all events, so it is easier to join in and participate. Instead of copying events from the google calendar UI, I made this tool to make it easy for me to announce upcoming events.
+
 # How
 
 Visit this page to enable google api auth: https://developers.google.com/calendar/quickstart/python
