@@ -1,0 +1,4 @@
+credentials.json
+*.pyc
+token.pickle
+venv
