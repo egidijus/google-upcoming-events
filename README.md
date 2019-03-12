@@ -11,13 +11,26 @@ Save the auth tokens in the same directory as this script.
 
 Install dependencies.
 ```
-pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+git clone https://github.com/egidijus/google-upcoming-events
+cd google-upcoming-events
+virtualenv --no-site-packages -p python3 venv
+. ./venv/bin/activate
+pip install -r requirements.txt
 ```
 
 run this like so:
 ```
-python main.py
+python main.py calendarID
 ```
+
+I have setup some Aliases in my bash env so I can see multiple events easily, you could do something like thin your `bashrc`
+
+```
+alias giddy-calendar="~/things/google-upcoming-events/venv/bin/python ~/things/google-upcoming-events/main.py primary"
+alias tech-events="~/things/google-upcoming-events/venv/bin/python ~/things/google-upcoming-events/main.py made.sdfsdfffsdfsdf@group.calendar.google.com"
+```
+and then simply use the aliases in your terminal.
+
 
 Get a lovely output like this:
 ```
