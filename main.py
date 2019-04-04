@@ -1,6 +1,7 @@
 #!/bin/env python
 
-import datetime
+from datetime import datetime, date
+# import datetime
 import pickle
 import os.path
 import json
@@ -19,9 +20,26 @@ def prettyfy_json(json_object):
     return json.dumps(json_object, indent=4, sort_keys=True)
 
 
+def datify_date(the_date):
+    # the_date = the_date.replace(tzinfo, "None")
+    # strftime Return a string representing the date and time, controlled by an explicit format string
+    # strptime Return a datetime corresponding to date_string
+    """
+    This takes in the wierdo date like 'Dec 01 00:00:00 2018 GMT' and churns out a datetime compatible date
+    we only chew first 20 charactes, because i do not want to faff with timezones
+    """
+    print("potato", the_date)
+    cooltime = datetime.strptime(the_date[:19], '%Y-%m-%dT%H:%M:%S')
+    print(cooltime)
+    cooltime = cooltime.strftime('%A, %d. %B %Y %I:%M%p')
+    return cooltime
+
+
 def main():
-    parser = argparse.ArgumentParser(description='please enter your calendarID')
-    parser.add_argument('CALENDAR_ID', default='primary', nargs='?', help='please enter your google calendarID')
+    parser = argparse.ArgumentParser(
+        description='please enter your calendarID')
+    parser.add_argument('CALENDAR_ID', default='primary',
+                        nargs='?', help='please enter your google calendarID')
     args = parser.parse_args()
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
@@ -48,7 +66,7 @@ def main():
     service = build('calendar', 'v3', credentials=creds)
 
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat(
+    now = datetime.utcnow().isoformat(
     ) + 'Z'  # 'Z' indicates UTC time
     print('Getting the upcoming 10 Events')
     events_result = service.events().list(
@@ -66,15 +84,18 @@ def main():
         location = event.get('location', 'not-set')
         start = event['start'].get('dateTime', event['start'].get('date'))
         end = event['end'].get('dateTime', event['end'].get('date'))
-        print(
-            "Event :: {}, Location :: {}, Start time :: {}, End time :: {}, Click here for details :: {} \n"
-            .format(
-                event['summary'],
-                location,
-                start,
-                end,
-                event['htmlLink'],
-            ))
+        print("cabbage", end)
+        # print(datify_date(end))
+        # print(type(event['end'].get('dateTime')))
+        # print(
+        #     "Event :: {}, Location :: {}, Start time :: {}, End time :: {}, Click here for details :: {} \n"
+        #     .format(
+        #         event['summary'],
+        #         location,
+        #         start,
+        #         end,
+        #         event['htmlLink'],
+        #     ))
 
 
 if __name__ == '__main__':
